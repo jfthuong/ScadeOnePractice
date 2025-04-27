@@ -1,0 +1,64 @@
+-- version swan: 2025.1 graph: 2.0
+function sum_integer_5_digits (i0: int32;)
+  returns (o0: int32;)
+{
+  diagram
+    (#7 def o0
+    #pragma diagram {"xy":"H35300;V-14625"} #end)
+    (#0 expr forward
+      <<5>>
+      diagram
+        (#1 expr last'n / 10
+        #pragma diagram {"xy":"h-2625;v-2400","wh":"16000;3200"} #end)
+        (#2 def n
+        #pragma diagram {"xy":"h21375;v-2400"} #end)
+        (#3 def sum
+        #pragma diagram {"xy":"h20625;v2400"} #end)
+        (#4 expr last'sum + (last'n mod 10)
+        #pragma diagram {"xy":"h-10375;v2400","wh":"30000;3200"} #end)
+        
+        (#5 wire #1 => #2)
+        (#6 wire #4 => #3)
+        
+        (var
+            n: int32 last=i0;)
+      until n = 0
+      returns (sum: last=0_i32)
+      #pragma diagram {"xy":"H-11925;V-14625","wh":"59350;24800"} #end)
+    
+    (#8 wire #0 .(2) => #7
+    #pragma diagram {"wp":"v0|#0 #7"} #end)
+}
+
+function sum_integer_N_digits (i0: int32;)
+  returns (o0: int32;)
+{
+  diagram
+    (#0 def o0
+    #pragma diagram {"xy":"H35300;V-14625"} #end)
+    (#1 expr forward
+      <<MAX_NB_DIGITS>>
+      diagram
+        (#2 expr last'n / 10
+        #pragma diagram {"xy":"h-2625;v-2400","wh":"16000;3200"} #end)
+        (#3 def n
+        #pragma diagram {"xy":"h21375;v-2400"} #end)
+        (#4 def sum
+        #pragma diagram {"xy":"h20625;v2400"} #end)
+        (#5 expr last'sum + (last'n mod 10)
+        #pragma diagram {"xy":"h-10375;v2400","wh":"30000;3200"} #end)
+        
+        (#6 wire #2 => #3)
+        (#7 wire #5 => #4)
+        
+        (var
+            n: int32 last=i0;)
+      until n = 0
+      returns (sum: last=0_i32)
+      #pragma diagram {"xy":"H-11925;V-14625","wh":"59350;24800"} #end)
+    
+    (#8 wire #1 .(2) => #0
+    #pragma diagram {"wp":"v0|#1 #0"} #end)
+}
+
+const MAX_NB_DIGITS: int32 = 10;

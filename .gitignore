@@ -1,0 +1,7 @@
+*.sproj.user
+
+# Jobs
+out/
+cg_log.json
+sim_log.json
+config.json

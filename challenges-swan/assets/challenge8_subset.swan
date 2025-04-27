@@ -1,0 +1,169 @@
+-- version swan: 2025.1 graph: 2.0
+function count_substr_size_3 <<N>> (set: 'T^N;
+                                    subset: 'T^3;)
+  returns (count: int32;)
+{
+  diagram
+    (#6 def count
+    #pragma diagram {"xy":"H41150;V-17550","wh":"10000;3200"} #end)
+    (#0 expr forward
+      <<N>> with [si] = set;
+      diagram
+        (#8 expr si
+        #pragma diagram {"xy":"h-33367;v-41450"} #end)
+        (#9 def _
+        #pragma diagram {"xy":"h-18767;v-41450"} #end)
+        
+        (#10 wire #8 => #9)
+        
+        (automaton $automaton0
+          initial state #1 outside_subset
+          #pragma diagram {"xy":"h11671;v-26250","wh":"13900;12000"} #end :
+          state #2 elt1
+          #pragma diagram {"xy":"h11671;v3750","wh":"13900;12000"} #end :
+          state #3 elt2
+          #pragma diagram {"xy":"h-28329;v3750","wh":"13900;12000"} #end :
+          state #5 elt3
+          #pragma diagram {"xy":"h11671;v31250","wh":"38000;11200"} #end :
+            diagram
+              (let count = last'count + 1;
+              #pragma diagram {"xy":"h0;v0","wh":"30000;3200"} #end)
+          :1: #1 unless if (si = subset[0])
+          restart #2
+          #pragma diagram {"tp":"h-4392;v6000|#1 v6000 v6000 h-4392;v-6000|#2"} #end;
+          :2: #2 unless if (si = subset[0])
+          restart #2
+          #pragma diagram {"tp":"h4608;v-6000|#2 v-500 v-500 v-500 v-1625 h1167;v-1625 h2333 h2333 h1167;v1750 v3500 v3500 h-1329;v1750 h-1329 h-667 h-667 h6950;v-250|#2"} #end;
+          :1: #2 unless if (si = subset[1])
+          restart #3
+          #pragma diagram {"tp":"h-6950;v2750|#2 h-8700 h-8700 h6950;v2750|#3"} #end;
+          :1: #3 unless if (si = subset[2])
+          restart #5
+          #pragma diagram {"tp":"h108;v6000|#3 v500 v500 v500 v9875 h9446;v9875 h9446 h667 h667 h-19000;v-250|#5"} #end;
+          :2: #3 unless if (si = subset[0])
+          restart #2
+          #pragma diagram {"tp":"h6950;v-2750|#3 h8700 h8700 h-6950;v-2750|#2"} #end;
+          :3: #2 unless 
+          restart #1
+          #pragma diagram {"tp":"h108;v-6000|#2 v-6000 v-6000 h108;v6000|#1"} #end;
+          :3: #3 unless 
+          restart #1
+          #pragma diagram {"tp":"h108;v-6000|#3 v-500 v-500 v-500 v-11375 h15471;v-11375 h15471 h667 h667 h-6950;v-250|#1"} #end;
+          :1: #5 unless if (si = subset[0])
+          restart #2
+          #pragma diagram {"tp":"h108;v-5600|#5 v-5300 v-5300 h108;v6000|#2"} #end;
+          :2: #5 unless 
+          restart #1
+          #pragma diagram {"tp":"h19000;v-250|#5 h500 h500 h500 h1554 h1554;v-3108 v-3108 v-8547 v-8547 v-8547 v-12821 h-7329;v-12821 h-7329 h-667 h-667 h6950;v-250|#1"} #end;
+          :2: #1 unless 
+          restart #1
+          #pragma diagram {"tp":"h-288;v-6000|#1 v-500 v-500 v-500 v-1550 h2000;v-1550 h4000 h4000 h2000;v1267 v2533 v2533 h-1381;v1267 h-1381 h-667 h-667 h6950;v-3000|#1"} #end;
+          #pragma diagram {"xy":"h0;v2200","wh":"78558;81700"} #end)
+      returns (count: last = 0_i32)
+      #pragma diagram {"xy":"H-21183;V-13550","wh":"87158;102500"} #end)
+    
+    (#7 wire #0 .(1) => #6
+    #pragma diagram {"wp":"v-4000|#0 #6"} #end)
+}
+
+function count_substr_size_S <<N, S>> (set: 'T^N;
+                                       subset: 'T^S;)
+  returns (count: int32;)
+{
+  diagram
+    (#0 def count
+    #pragma diagram {"xy":"H38000;V-17550","wh":"10000;3200"} #end)
+    (#1 expr forward
+      <<N>> with [si] = set;
+      diagram
+        (#2 expr si
+        #pragma diagram {"xy":"h-32425;v38288"} #end)
+        (#3 def _
+        #pragma diagram {"xy":"h-14025;v38287"} #end)
+        (#13 expr eltIdx
+        #pragma diagram {"xy":"h6975;v38288","wh":"10000;3200"} #end)
+        (#14 def _
+        #pragma diagram {"xy":"h27975;v38288"} #end)
+        (#16 expr si = (subset.[last'eltIdx + 1] default subset[0])
+        #pragma diagram {"xy":"h-36300;v-28767","wh":"50000;3200"} #end)
+        (#17 def goToNext
+        #pragma diagram {"xy":"h6700;v-28767","wh":"12000;3200"} #end)
+        (#19 def isLastElt
+        #pragma diagram {"xy":"h9100;v-34134","wh":"14000;3200"} #end)
+        (#20 expr (S <= 1) or (last'eltIdx = S - 2)
+        #pragma diagram {"xy":"h-27900;v-34134","wh":"36000;3200"} #end)
+        (#7 def isFirstElt
+        #pragma diagram {"xy":"h8900;v-39226","wh":"14000;3200"} #end)
+        (#11 expr si = subset[0]
+        #pragma diagram {"xy":"h-19100;v-39226","wh":"18000;3200"} #end)
+        
+        (#4 wire #2 => #3)
+        (#15 wire #13 => #14)
+        (#18 wire #16 => #17)
+        (#21 wire #20 => #19)
+        (#12 wire #11 => #7)
+        
+        (var
+            eltIdx: int32 last=-1;
+            isFirstElt: bool;
+            goToNext: bool default = false;
+            isLastElt: bool;
+            resetIdx: bool;)
+        (automaton $automaton0
+          initial state #5 outsideSubset
+          #pragma diagram {"xy":"h9900;v19350","wh":"28000;11200"} #end :
+            diagram
+              (let eltIdx = -1;
+              #pragma diagram {"xy":"h0;v0","wh":"20000;3200"} #end)
+          state #6 firstMidElt
+          #pragma diagram {"xy":"h-28125;v-2614","wh":"46000;14078"} #end :
+            diagram
+              (let eltIdx = if resetIdx
+                            then 0
+                            else (last'eltIdx + 1);
+              #pragma diagram {"xy":"h0;v0","wh":"38000;6078"} #end)
+          state #9 lastElt
+          #pragma diagram {"xy":"h38100;v-9452","wh":"38000;11200"} #end :
+            diagram
+              (let count = last'count + 1;
+              #pragma diagram {"xy":"h0;v0","wh":"30000;3200"} #end)
+          :2: #9 unless 
+          restart #5
+          #pragma diagram {"tp":"h-16600;v5600|#9 v5867 v5867 h11600;v-5600|#5"} #end;
+          :1: #5 unless if (isFirstElt)
+            :2: if (true)
+            restart #6
+            :1: if (S <= 1)
+            restart #9 end
+          #pragma diagram {"tp":"h-912;v-5600|#5 v-2083 v-2083 h0;v2000|h8988;v5501[h-2000;v-1538 h-4038 h-4038 h23000;v6577|#6, h-88;v-2000 v-167 v-167 v-167 v-6227 h4100;v-6227 h4100 h667 h667 h-19000;v0|#9]"} #end;
+          :2: #6 unless if (isFirstElt)
+          {
+            emit'resetIdx;
+          }
+          restart #6
+          #pragma diagram {"tp":"h-23000;v-3303|#6 h-500 h-500 h-500 h-1550 h-1550;v-1417 v-2833 v-2833 h2000;v-1417 h4000 h4000 h2000;v1382 v1382 v667 v667 h-15600;v-7039|#6"} #end;
+          :3: #6 unless 
+          restart #5
+          #pragma diagram {"tp":"h-1375;v7039|#6 v500 v500 v500 v6712 h11700;v6712 h11700 h667 h667 h-14000;v0|#5"} #end;
+          :1: #9 unless if (isFirstElt)
+          {
+            emit'resetIdx;
+          }
+            :2: if (true)
+            restart #6
+            :1: if (S <= 1)
+            restart #9 end
+          #pragma diagram {"tp":"h-19000;v-2684|#9 h-5292 h-5292 h2000;v0|h1225;v-12136[h175;v2000 v167 v167 v167 v3511 h-2262;v3511 h-2262 h-667 h-667 h23000;v0|#6, h175;v-2000 v-167 v-167 v-167 v-2494 h4989;v-2494 h4989;v0 h7193 h7193 h7193 h2573;v0 h2573;v1286 v1286 v667 v667 h0;v-5600|#9]"} #end;
+          :1: #6 unless if (goToNext)
+            :2: if (true)
+            restart #6
+            :1: if (isLastElt)
+            restart #9 end
+          #pragma diagram {"tp":"h15425;v-7039|#6 v-3479 v-3479 h0;v2000|h-12700;v-22090[h-2000;v86 h-167 h-167 h-167 h-6462 h-6462;v5175 v5175 v667 v667 h0;v-7039|#6, h2000;v-35 h167 h31170 h15418 h15207 h10138;v1690 v3379 v422 v422 v422 v4224 h-1150;v2112 h-1150 h-667 h-667 h19000;v0|#9]"} #end;
+          #pragma diagram {"xy":"h800;v5488","wh":"130800;57900"} #end)
+      returns (count: last = 0_i32)
+      #pragma diagram {"xy":"H-47500;V-26063","wh":"141000;98053"} #end)
+    
+    (#10 wire #1 .(1) => #0
+    #pragma diagram {"wp":"v8513|#1 #0"} #end)
+}

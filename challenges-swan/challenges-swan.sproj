@@ -1,0 +1,17 @@
+{
+  "Version": "1.0",
+  "Name": "challenges-swan",
+  "Dependencies": [],
+  "Resources": [
+    {
+      "Kind": "SimulationData",
+      "Path": "resources\\sum_integer_5_digits_inputs.sd",
+      "Key": "sum_integer_5_digits_inputs"
+    },
+    {
+      "Kind": "SimulationData",
+      "Path": "resources\\sum_integer_5_digits_outputs.sd",
+      "Key": "sum_integer_5_digits_outputs"
+    }
+  ]
+}

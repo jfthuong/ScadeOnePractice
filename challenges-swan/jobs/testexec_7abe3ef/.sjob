@@ -1,0 +1,16 @@
+{
+  "Version": "2.1",
+  "Kind": "TestExecution",
+  "Properties": {
+    "RootDeclarations": [
+      ""
+    ],
+    "Name": "TestForward5",
+    "CustomArguments": "",
+    "TestHarness": "testModule::ch1_harness_sum_integer_5_digits",
+    "TestResultFile": "testResults.json"
+  },
+  "InputPaths": [
+    "assets/testModule.swant"
+  ]
+}

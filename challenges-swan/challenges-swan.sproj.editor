@@ -1,0 +1,10 @@
+{
+  "JobsOrder": [
+    "jobs\\testexec_7abe3ef\\.sjob"
+  ],
+  "ModulesOrder": [
+    "assets\\challenge1.swan",
+    "assets\\challenge8_subset.swan",
+    "assets\\testModule.swant"
+  ]
+}

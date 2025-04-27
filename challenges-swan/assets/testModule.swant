@@ -1,0 +1,127 @@
+-- version swan: 2025.1 graph: 2.0 swant: 1.1
+use challenge1;
+
+use challenge8_subset;
+
+_harness ch1_harness_sum_integer_5_digits
+{
+  diagram
+    (#0 block (_oracle sum_integer_5_digits_outputs)
+    #pragma diagram {"xy":"H0;V0","wh":"12000;7000"} #end)
+    (#1 #pragma swt under_test #end block challenge1::sum_integer_5_digits
+                                          #pragma diagram {"xy":"H-35000;V0","wh":"20000;14000"} #end)
+    (#3 block (_source sum_integer_5_digits_inputs)
+    #pragma diagram {"xy":"H-68150;V0","wh":"12000;7000"} #end)
+    (#5 def _stop_condition
+    #pragma diagram {"xy":"H-19425;V-12350","wh":"20000;3200"} #end)
+    (#6 expr _current_cycle < 8
+    #pragma diagram {"xy":"H-48825;V-12350","wh":"22000;3200"} #end)
+    
+    (#2 wire #1 => #0
+    #pragma diagram {"wp":"v0|#1 #0"} #end)
+    (#4 wire #3 .(i0) => #1 .(i0)
+    #pragma diagram {"wp":"v0|#3 #1"} #end)
+    (#7 wire #6 => #5)
+}
+
+_harness ch8_harness_count_substr
+{
+  diagram
+    (#0 #pragma swt under_test #end block challenge8_subset::count_substr_size_3 <<8>> 
+                                          #pragma diagram {"xy":"H4000;V4600","wh":"20000;14000"} #end)
+    (#1 expr [1_i32, 1, 1, 2, 2, 1, 1, 1] pre
+             [1, 1, 2, 1, 1, 1, 1, 2]
+    #pragma diagram {"xy":"H-35500;V8609","wh":"36000;4219"} #end)
+    (#2 expr [1_i32, 1, 1]
+    #pragma diagram {"xy":"H-30500;V1100","wh":"18000;3200"} #end)
+    (assert $check_ch8: #4 ; 
+      where
+        (#4 group)
+    #pragma diagram {"xy":"H59525;V11800"} #end)
+    (#5 expr #6 = #7
+      where
+        (#6 group)
+        (#7 group)
+    #pragma diagram {"xy":"H36525;V11800"} #end)
+    (#8 expr 2 pre 1
+    #pragma diagram {"xy":"H8050;V13700","wh":"12000;3200"} #end)
+    (assert $check_ch8_N: #15 ; 
+      where
+        (#15 group)
+    #pragma diagram {"xy":"H59475;V33450"} #end)
+    (#16 expr 2 pre 1
+    #pragma diagram {"xy":"H7950;V35350","wh":"12000;3200"} #end)
+    (#17 #pragma swt under_test #end block challenge8_subset::count_substr_size_S <<8, 3>> 
+                                           #pragma diagram {"xy":"H3950;V26250","wh":"20000;14000"} #end)
+    (#18 expr #19 = #20
+      where
+        (#19 group)
+        (#20 group)
+    #pragma diagram {"xy":"H36475;V33450"} #end)
+    (#21 expr [1_i32, 1, 1]
+    #pragma diagram {"xy":"H-30500;V22750","wh":"18000;3200"} #end)
+    (#22 expr [1_i32, 1, 1, 2, 2, 1, 1, 1] pre
+              [1, 1, 2, 1, 1, 1, 1, 2]
+    #pragma diagram {"xy":"H-39500;V30259","wh":"36000;4219"} #end)
+    (#28 #pragma swt under_test #end block challenge8_subset::count_substr_size_S <<8, 1>> 
+                                           #pragma diagram {"xy":"H3950;V45975","wh":"20000;14000"} #end)
+    (#29 expr 6 pre 3
+    #pragma diagram {"xy":"H8000;V55075","wh":"12000;3200"} #end)
+    (#30 expr [1_i32, 1, 1, 2, 2, 1, 1, 1] pre
+              [1, 1, 2, 3, 4, 3, 2, 1]
+    #pragma diagram {"xy":"H-39500;V49984","wh":"36000;4219"} #end)
+    (assert $check_ch8_N_1: #32 ; 
+      where
+        (#32 group)
+    #pragma diagram {"xy":"H59475;V53175"} #end)
+    (#33 expr #34 = #35
+      where
+        (#34 group)
+        (#35 group)
+    #pragma diagram {"xy":"H36475;V53175"} #end)
+    (#36 expr [1_i32]
+    #pragma diagram {"xy":"H-27500;V42475","wh":"12000;3200"} #end)
+    (#37 #pragma swt under_test #end block challenge8_subset::count_substr_size_S <<8, 2>> 
+                                           #pragma diagram {"xy":"H3950;V67000","wh":"20000;14000"} #end)
+    (#38 expr 1 pre 2
+    #pragma diagram {"xy":"H8000;V76100","wh":"12000;3200"} #end)
+    (#39 expr [1_i32, 1, 1, 2, 2, 1, 1, 1] pre
+              [1, 1, 2, 1, 1, 1, 1, 2]
+    #pragma diagram {"xy":"H-39500;V71891","wh":"36000;4219"} #end)
+    (assert $check_ch8_N_2: #41 ; 
+      where
+        (#41 group)
+    #pragma diagram {"xy":"H59475;V74200"} #end)
+    (#42 expr #43 = #44
+      where
+        (#43 group)
+        (#44 group)
+    #pragma diagram {"xy":"H36475;V74200"} #end)
+    (#45 expr [1_i32, 2]
+    #pragma diagram {"xy":"H-28500;V63500","wh":"14000;3200"} #end)
+    
+    (#9 wire #1 => #0 .(set))
+    (#10 wire #2 => #0 .(subset))
+    (#11 wire #0 .(count) => #6
+    #pragma diagram {"wp":"v5300|#0 #6"} #end)
+    (#12 wire #8 => #7)
+    (#13 wire #5 => #4)
+    (#23 wire #21 => #17 .(subset))
+    (#24 wire #18 => #15)
+    (#25 wire #16 => #20)
+    (#26 wire #22 => #17 .(set))
+    (#27 wire #17 .(count) => #19
+    #pragma diagram {"wp":"v5300|#17 #19"} #end)
+    (#46 wire #33 => #32)
+    (#47 wire #28 .(count) => #34
+    #pragma diagram {"wp":"v5300|#28 #34"} #end)
+    (#48 wire #36 => #28 .(subset))
+    (#49 wire #30 => #28 .(set))
+    (#50 wire #29 => #35)
+    (#51 wire #42 => #41)
+    (#52 wire #37 .(count) => #43
+    #pragma diagram {"wp":"v5300|#37 #43"} #end)
+    (#53 wire #45 => #37 .(subset))
+    (#54 wire #39 => #37 .(set))
+    (#55 wire #38 => #44)
+}
