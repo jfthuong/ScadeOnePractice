@@ -1,5 +1,9 @@
 # Challenges to practice Scade One / Swan Language
 
+Challenges to practice knowledge of [Scade One](https://www.ansys.com/products/embedded-software/ansys-scade-one).
+
+The software can be downloaded for free in the Student version here: https://www.ansys.com/academic/students/ansys-scade-student
+
 ... the challenges are inspired by challenges for C language
 
 ## Challenge 1: Sum of digits
