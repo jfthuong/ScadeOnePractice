@@ -63,7 +63,6 @@ Write an operator to check if a given number is a prime number.
 
 ## Challenge 8: Count subsets
 
-<!-- ? Is it  DOABLE? -->
 Write an operator that counts the number a given list (of chars or numbers) has a given subset of length 3, without overlap.
 
 Examples:
@@ -84,34 +83,33 @@ Only square matrices will be given.
 Example:
 
 ```swan
-  A         B          C
-|1 2|  x  |3 2|  =  | 5 4|
-|3 2|     |1 1|     |11 8|
-```
+    A         B          C
+|2 3|  x  |4 1|  =  |14  5|
+|1 4|     |2 3|     |10 13|
 
-Detailled computation
+Detailed computation:
 
-```swan
-C[0][0] = A[0][0] * B[0][0] + A[0][1] * B[1][0] = 1*3 + 2*1 =  5
-C[0][1] = A[0][0] * B[0][1] + A[0][1] * B[1][1] = 1*2 + 2*1 =  4
-C[1][0] = A[1][0] * B[0][0] + A[1][1] * B[1][0] = 3*3 + 2*1 = 11
-C[1][1] = A[1][0] * B[0][1] + A[1][1] * B[1][1] = 3*2 + 2*1 =  8
+C[0][0] = A[0][0] * B[0][0] + A[0][1] * B[1][0] = 2*4 + 3*2 = 14
+C[0][1] = A[0][0] * B[0][1] + A[0][1] * B[1][1] = 2*1 + 3*3 =  5
+C[1][0] = A[1][0] * B[0][0] + A[1][1] * B[1][0] = 1*4 + 4*2 = 10
+C[1][1] = A[1][0] * B[0][1] + A[1][1] * B[1][1] = 1*1 + 4*3 = 13
 ```
 
 ## Challenge 10: Narcissistic number
 
-A Narcissistic Number (or Armstrong Number) is a positive number which is the sum of its own digits, each raised to the power of the number of digits in a given base. In this challenge, we restrict ourselves to decimal (base 10).
+Return whether a given number is a Narcissistic number in base 10.
 
-For example, take `153` (3 digits), which is narcissistic:
+A Narcissistic Number (also known as an Armstrong Number) is a positive integer that is equal to the sum of its own digits, each raised to the power of the total number of digits in the number. In this challenge, we will use the base 10 system.
 
-```swan
-    1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
-```
-
-and `1652` (4 digits), which isn't:
+For example, take `9474` (4 digits), which is narcissistic:
 
 ```swan
-    1^4 + 6^4 + 5^4 + 2^4 = 1 + 1296 + 625 + 16 = 1938
+    9^4 + 4^4 + 7^4 + 4^4 = 6561 + 256 + 2401 + 256 = 9474
 ```
 
-The Challenge: return 'true' or 'false' depending upon whether the given number is a Narcissistic number in base 10.
+and `1234` (4 digits), which isn't:
+
+```swan
+    1^4 + 2^4 + 3^4 + 4^4 = 1 + 16 + 81 + 256 = 354
+```
+
