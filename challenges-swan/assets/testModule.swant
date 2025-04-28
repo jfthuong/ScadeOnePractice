@@ -3,25 +3,55 @@ use challenge1;
 
 use challenge8_subset;
 
+use ch2_palindrome;
+
 _harness ch1_harness_sum_integer_5_digits
 {
   diagram
     (#0 block (_oracle sum_integer_5_digits_outputs)
-    #pragma diagram {"xy":"H0;V0","wh":"12000;7000"} #end)
+    #pragma diagram {"xy":"H24000;V0","wh":"12000;7000"} #end)
     (#1 #pragma swt under_test #end block challenge1::sum_integer_5_digits
-                                          #pragma diagram {"xy":"H-35000;V0","wh":"20000;14000"} #end)
+                                          #pragma diagram {"xy":"H-15450;V0","wh":"28900;14000"} #end)
     (#3 block (_source sum_integer_5_digits_inputs)
-    #pragma diagram {"xy":"H-68150;V0","wh":"12000;7000"} #end)
+    #pragma diagram {"xy":"H-57500;V0","wh":"12000;7000"} #end)
     (#5 def _stop_condition
-    #pragma diagram {"xy":"H-19425;V-12350","wh":"20000;3200"} #end)
-    (#6 expr _current_cycle < 8
-    #pragma diagram {"xy":"H-48825;V-12350","wh":"22000;3200"} #end)
+    #pragma diagram {"xy":"H2656;V-25838","wh":"20000;3200"} #end)
+    (#6 expr _current_cycle >= 8
+    #pragma diagram {"xy":"H-30344;V-25838","wh":"22000;3200"} #end)
+    (assert $equal_N: #10 ; 
+      where
+        (#10 group)
+    #pragma diagram {"xy":"H48000;V-11600"} #end)
+    (#9 #pragma swt under_test #end block challenge1::sum_integer_N_digits_fold
+                                          #pragma diagram {"xy":"H-15450;V14500","wh":"28900;14000"} #end)
+    (#12 expr #13 = #14
+      where
+        (#13 group)
+        (#14 group)
+    #pragma diagram {"xy":"H25000;V11600"} #end)
+    (assert $equal_fold: #16 ; 
+      where
+        (#16 group)
+    #pragma diagram {"xy":"H48000;V11600"} #end)
+    (#17 #pragma swt under_test #end block challenge1::sum_integer_N_digits
+                                           #pragma diagram {"xy":"H-15450;V-14500","wh":"28900;14000"} #end)
+    (#18 expr #19 = #20
+      where
+        (#19 group)
+        (#20 group)
+    #pragma diagram {"xy":"H25000;V-11600"} #end)
     
-    (#2 wire #1 => #0
-    #pragma diagram {"wp":"v0|#1 #0"} #end)
-    (#4 wire #3 .(i0) => #1 .(i0)
-    #pragma diagram {"wp":"v0|#3 #1"} #end)
+    (#2 wire #1 => #0, #13, #20
+    #pragma diagram {"wp":"v0|#1 h5164[h6328[#0, v9700 #13], v-9700 #20]"} #end)
+    (#4 wire #3 .(i0) => #1 .(i0), #9 .(i0), #17 .(i0)
+    #pragma diagram {"wp":"v0|#3 h6400[h8800[#1, v14500 #9], v-14500 #17]"} #end)
     (#7 wire #6 => #5)
+    (#11 wire #9 => #14
+    #pragma diagram {"wp":"v-1000|#9 #14"} #end)
+    (#21 wire #12 => #16)
+    (#22 wire #17 => #19
+    #pragma diagram {"wp":"v1000|#17 #19"} #end)
+    (#23 wire #18 => #10)
 }
 
 _harness ch8_harness_count_substr
@@ -124,4 +154,185 @@ _harness ch8_harness_count_substr
     (#53 wire #45 => #37 .(subset))
     (#54 wire #39 => #37 .(set))
     (#55 wire #38 => #44)
+}
+
+_harness harness_is_palindrome
+{
+  diagram
+    (#0 $test_nb_even #pragma swt under_test #end block ch2_palindrome::is_palindrome_list <<4>> 
+                                                        #pragma diagram {"xy":"H-10300;V-11800","wh":"20000;14000"} #end)
+    (#1 expr [1_i32, 2, 2, 1] pre
+             [1, 2, 3, 1] pre
+             [1, 2, 2, 3]
+    #pragma diagram {"xy":"H-41750;V-11800","wh":"24000;6078"} #end)
+    (#2 expr #3 = #4
+      where
+        (#3 group)
+        (#4 group)
+    #pragma diagram {"xy":"H27350;V-11800"} #end)
+    (#5 expr true pre
+             false pre
+             false
+    #pragma diagram {"xy":"H11825;V-7511","wh":"14000;6078"} #end)
+    (assert $check_list_4: #7 ; 
+      where
+        (#7 group)
+    #pragma diagram {"xy":"H42650;V-11800"} #end)
+    (#12 $test_int_nb_even #pragma swt under_test #end block ch2_palindrome::is_palindrome_int <<4>> 
+                                                             #pragma diagram {"xy":"H-11350;V10050","wh":"20000;14000"} #end)
+    (#13 expr 1221_i32 pre
+              1231 pre
+              1223
+    #pragma diagram {"xy":"H-46800;V10050","wh":"16000;6078"} #end)
+    (#14 expr true pre
+              false pre
+              false
+    #pragma diagram {"xy":"H10775;V14339","wh":"14000;6078"} #end)
+    (assert $check_int_4: #16 ; 
+      where
+        (#16 group)
+    #pragma diagram {"xy":"H41600;V10050"} #end)
+    (#17 expr #18 = #19
+      where
+        (#18 group)
+        (#19 group)
+    #pragma diagram {"xy":"H26300;V10050"} #end)
+    (#24 expr #25 = #26
+      where
+        (#25 group)
+        (#26 group)
+    #pragma diagram {"xy":"H26300;V28575"} #end)
+    (#27 expr 1221_i32 pre
+              1231 pre
+              1223 pre
+              13531 pre
+              13571 pre
+              1
+    #pragma diagram {"xy":"H-46800;V31364","wh":"16000;11657"} #end)
+    (#28 $test_int_no_size #pragma swt under_test #end block ch2_palindrome::is_palindrome_int_no_size
+                                                             #pragma diagram {"xy":"H-11350;V28575","wh":"20000;14000"} #end)
+    (assert $check_int_no_size: #30 ; 
+      where
+        (#30 group)
+    #pragma diagram {"xy":"H41600;V28575"} #end)
+    (#31 expr true pre
+              false pre
+              false pre
+              true pre
+              false pre
+              true
+    #pragma diagram {"xy":"H10775;V35653","wh":"14000;11657"} #end)
+    (#36 expr true pre
+              false pre
+              false
+    #pragma diagram {"xy":"H53425;V83689","wh":"14000;6078"} #end)
+    (assert $check_int_1: #38 ; 
+      where
+        (#38 group)
+    #pragma diagram {"xy":"H84250;V79400"} #end)
+    (#39 $test_int_1_odd #pragma swt under_test #end block ch2_palindrome::is_palindrome_int <<1>> 
+                                                           #pragma diagram {"xy":"H31300;V79400","wh":"20000;14000"} #end)
+    (#40 expr #48 = #50
+      where
+        (#48 group)
+        (#50 group)
+    #pragma diagram {"xy":"H139100;V-9900"} #end)
+    (#41 expr #42 = #43
+      where
+        (#42 group)
+        (#43 group)
+    #pragma diagram {"xy":"H70000;V57550"} #end)
+    (assert $check_list_1: #45 ; 
+      where
+        (#45 group)
+    #pragma diagram {"xy":"H85300;V57550"} #end)
+    (#46 expr true
+    #pragma diagram {"xy":"H51475;V60400"} #end)
+    (#47 expr [1_i32]
+    #pragma diagram {"xy":"H-5100;V56111","wh":"12000;3200"} #end)
+    (#51 $test_int_nb_odd #pragma swt under_test #end block ch2_palindrome::is_palindrome_int <<5>> 
+                                                            #pragma diagram {"xy":"H100400;V11950","wh":"20000;14000"} #end)
+    (#49 $test_nb_1 #pragma swt under_test #end block ch2_palindrome::is_palindrome_list <<1>> 
+                                                      #pragma diagram {"xy":"H32350;V57550","wh":"20000;14000"} #end)
+    (#52 expr true pre
+              false pre
+              false
+    #pragma diagram {"xy":"H122525;V16239","wh":"14000;6078"} #end)
+    (assert $check_int_5: #55 ; 
+      where
+        (#55 group)
+    #pragma diagram {"xy":"H153350;V11950"} #end)
+    (#54 expr 1_i32
+    #pragma diagram {"xy":"H-7150;V77961","wh":"10000;3200"} #end)
+    (#57 expr #58 = #59
+      where
+        (#58 group)
+        (#59 group)
+    #pragma diagram {"xy":"H68950;V79400"} #end)
+    (assert $check_list_5: #63 ; 
+      where
+        (#63 group)
+    #pragma diagram {"xy":"H154400;V-9900"} #end)
+    (#64 expr true pre
+              false pre
+              false
+    #pragma diagram {"xy":"H123575;V-5611","wh":"14000;6078"} #end)
+    (#65 expr [1_i32, 2, 3, 2, 1] pre
+              [1, 2, 3, 3, 1] pre
+              [1, 2, 3, 2, 3]
+    #pragma diagram {"xy":"H71000;V-9900","wh":"26000;6078"} #end)
+    (#68 $test_nb_odd #pragma swt under_test #end block ch2_palindrome::is_palindrome_list <<5>> 
+                                                        #pragma diagram {"xy":"H101450;V-9900","wh":"20000;14000"} #end)
+    (#72 expr 12321_i32 pre
+              12331 pre
+              12323
+    #pragma diagram {"xy":"H69000;V11950","wh":"18000;6078"} #end)
+    (#73 expr #74 = #75
+      where
+        (#74 group)
+        (#75 group)
+    #pragma diagram {"xy":"H138050;V11950"} #end)
+    
+    (#8 wire #1 => #0)
+    (#9 wire #0 .(is_palindrome) => #3
+    #pragma diagram {"wp":"v-1900|#0 #3"} #end)
+    (#10 wire #5 => #4
+    #pragma diagram {"wp":"#5 h3025 v-2389 #4"} #end)
+    (#11 wire #2 => #7)
+    (#20 wire #14 => #19
+    #pragma diagram {"wp":"#14 h3025 v-2389 #19"} #end)
+    (#21 wire #17 => #16)
+    (#22 wire #12 .(is_palindrome) => #18
+    #pragma diagram {"wp":"v-1900|#12 #18"} #end)
+    (#23 wire #13 => #12)
+    (#32 wire #28 .(is_palindrome) => #25
+    #pragma diagram {"wp":"v-1900|#28 #25"} #end)
+    (#33 wire #27 => #28)
+    (#34 wire #24 => #30)
+    (#35 wire #31 => #26
+    #pragma diagram {"wp":"#31 h3013 v-5178 #26"} #end)
+    (#60 wire #47 => #49)
+    (#61 wire #49 .(is_palindrome) => #42
+    #pragma diagram {"wp":"v-1900|#49 #42"} #end)
+    (#62 wire #36 => #59
+    #pragma diagram {"wp":"#36 h3025 v-2389 #59"} #end)
+    (#76 wire #68 .(is_palindrome) => #48
+    #pragma diagram {"wp":"v-1900|#68 #48"} #end)
+    (#77 wire #65 => #68)
+    (#78 wire #52 => #75
+    #pragma diagram {"wp":"#52 h3025 v-2389 #75"} #end)
+    (#66 wire #57 => #38)
+    (#67 wire #41 => #45)
+    (#69 wire #46 => #43
+    #pragma diagram {"wp":"#46 h6263 v-950 #43"} #end)
+    (#70 wire #54 => #39)
+    (#71 wire #39 .(is_palindrome) => #58
+    #pragma diagram {"wp":"v-1900|#39 #58"} #end)
+    (#79 wire #73 => #55)
+    (#80 wire #40 => #63)
+    (#81 wire #64 => #50
+    #pragma diagram {"wp":"#64 h3025 v-2389 #50"} #end)
+    (#82 wire #72 => #51)
+    (#83 wire #51 .(is_palindrome) => #74
+    #pragma diagram {"wp":"v-1900|#51 #74"} #end)
 }

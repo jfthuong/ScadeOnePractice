@@ -1,10 +1,12 @@
 -- version swan: 2025.1 graph: 2.0
+const MAX_NB_DIGITS_UINT64: int32 = 10;
+
 function sum_integer_5_digits (i0: int32;)
-  returns (o0: int32;)
+  returns (sum_digits: uint8;)
 {
   diagram
-    (#7 def o0
-    #pragma diagram {"xy":"H35300;V-14625"} #end)
+    (#7 def sum_digits
+    #pragma diagram {"xy":"H38300;V-14625","wh":"14000;3200"} #end)
     (#0 expr forward
       <<5>>
       diagram
@@ -14,16 +16,16 @@ function sum_integer_5_digits (i0: int32;)
         #pragma diagram {"xy":"h21375;v-2400"} #end)
         (#3 def sum
         #pragma diagram {"xy":"h20625;v2400"} #end)
-        (#4 expr last'sum + (last'n mod 10)
-        #pragma diagram {"xy":"h-10375;v2400","wh":"30000;3200"} #end)
+        (#4 expr last'sum + (last'n mod 10:>uint8)
+        #pragma diagram {"xy":"h-7375;v2400","wh":"36000;3200"} #end)
         
         (#5 wire #1 => #2)
         (#6 wire #4 => #3)
         
         (var
-            n: int32 last=i0;)
+            n: int32 last=Abs(i0);)
       until n = 0
-      returns (sum: last=0_i32)
+      returns (sum: last=0_ui8)
       #pragma diagram {"xy":"H-11925;V-14625","wh":"59350;24800"} #end)
     
     (#8 wire #0 .(2) => #7
@@ -31,13 +33,13 @@ function sum_integer_5_digits (i0: int32;)
 }
 
 function sum_integer_N_digits (i0: int32;)
-  returns (o0: int32;)
+  returns (sum_digits: uint8;)
 {
   diagram
-    (#0 def o0
-    #pragma diagram {"xy":"H35300;V-14625"} #end)
+    (#0 def sum_digits
+    #pragma diagram {"xy":"H38300;V-14625","wh":"14000;3200"} #end)
     (#1 expr forward
-      <<MAX_NB_DIGITS>>
+      <<MAX_NB_DIGITS_UINT64>>
       diagram
         (#2 expr last'n / 10
         #pragma diagram {"xy":"h-2625;v-2400","wh":"16000;3200"} #end)
@@ -45,20 +47,79 @@ function sum_integer_N_digits (i0: int32;)
         #pragma diagram {"xy":"h21375;v-2400"} #end)
         (#4 def sum
         #pragma diagram {"xy":"h20625;v2400"} #end)
-        (#5 expr last'sum + (last'n mod 10)
-        #pragma diagram {"xy":"h-10375;v2400","wh":"30000;3200"} #end)
+        (#5 expr last'sum + (last'n mod 10:>uint8)
+        #pragma diagram {"xy":"h-7375;v2400","wh":"36000;3200"} #end)
         
         (#6 wire #2 => #3)
         (#7 wire #5 => #4)
         
         (var
-            n: int32 last=i0;)
+            n: int32 last=Abs(i0);)
       until n = 0
-      returns (sum: last=0_i32)
+      returns (sum: last=0_ui8)
       #pragma diagram {"xy":"H-11925;V-14625","wh":"59350;24800"} #end)
     
     (#8 wire #1 .(2) => #0
     #pragma diagram {"wp":"v0|#1 #0"} #end)
 }
 
-const MAX_NB_DIGITS: int32 = 10;
+function sum_integer_N_digits_fold (i0: 'T;)
+  returns (sum_digits: uint8;)
+  where 'T integer
+{
+  diagram
+    (#0 block (mapfold ({op_expr%function n => (n / 10, (n mod 10:>uint8))%op_expr})) <<MAX_NB_DIGITS_UINT64>>
+    #pragma diagram {"xy":"H-37900;V-23575","wh":"24900;17950"} #end)
+    (#2 expr Abs(i0)
+    #pragma diagram {"xy":"H-71850;V-23575","wh":"12000;3200"} #end)
+    (#4 block (fold {text%(+)%text}) <<MAX_NB_DIGITS_UINT64>>
+    #pragma diagram {"xy":"H6350;V-28062","wh":"24000;17950"} #end)
+    (#6 expr 0
+    #pragma diagram {"xy":"H-29450;V-34650"} #end)
+    (#7 def sum_digits
+    #pragma diagram {"xy":"H40850;V-28062","wh":"14000;3200"} #end)
+    
+    (#8 wire #2 => #0)
+    (#10 wire #0 .(2) => #4 .(2)
+    #pragma diagram {"wp":"v-1494|#0 #4"} #end)
+    (#11 wire #6 => #4 .(1)
+    #pragma diagram {"wp":"#6 h11400 v5581 #4"} #end)
+    (#12 wire #4 => #7
+    #pragma diagram {"wp":"v-1987|#4 #7"} #end)
+}
+
+inline function /* Return the absolute value of the operand. */ Abs (/* Operand */ x: 'T;)
+  returns (/* Result of the operation */ v: 'T;)
+  where 'T numeric
+{
+  diagram
+    (#0 expr (0 :> 'T)
+    #pragma diagram {"xy":"H8930;V7415","wh":"12438;3200"} #end)
+    (#1 def v
+    #pragma diagram {"xy":"H75149;V15815"} #end)
+    (#2 expr x
+    #pragma diagram {"xy":"H11149;V13915"} #end)
+    (#3 expr - #4
+      where
+        (#4 group)
+    #pragma diagram {"xy":"H33149;V17715"} #end)
+    (#5 expr if #6 then #7 else #8
+      where
+        (#6 group)
+        (#7 group)
+        (#8 group)
+    #pragma diagram {"xy":"H54149;V15815"} #end)
+    (#9 expr #10 <= #11
+      where
+        (#10 group)
+        (#11 group)
+    #pragma diagram {"xy":"H32149;V9315"} #end)
+    
+    (#12 wire #3 => #8)
+    (#13 wire #2 => #11, #4, #7
+    #pragma diagram {"wp":"#2 h6000[v-2700 #11, h5000[v3800 #4, #7]]"} #end)
+    (#14 wire #5 => #1)
+    (#15 wire #0 => #10)
+    (#16 wire #9 => #6
+    #pragma diagram {"wp":"#9 h18500 #6"} #end)
+}

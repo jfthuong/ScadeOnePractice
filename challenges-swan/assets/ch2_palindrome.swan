@@ -1,0 +1,178 @@
+-- version swan: 2025.1 graph: 2.0
+function is_palindrome_list <<N>> (list: 'T^N;)
+  returns (is_palindrome: bool;)
+{
+  diagram
+    (#0 def is_palindrome
+    #pragma diagram {"xy":"H-7850;V-58650","wh":"18000;3200"} #end)
+    (#1 expr forward
+      <<N>> with <<i>>
+      diagram
+        (#2 expr list[i] = list[N-1-i]
+        #pragma diagram {"xy":"h-27000;v-1900","wh":"24000;3200"} #end)
+        (#3 expr true pre is_palindrome
+        #pragma diagram {"xy":"h-28000;v1900","wh":"26000;3200"} #end)
+        (#4 expr #5 and #6
+          where
+            (#5 group)
+            (#6 group)
+        #pragma diagram {"xy":"h4000;v0"} #end)
+        (#7 def is_palindrome
+        #pragma diagram {"xy":"h32000;v0","wh":"18000;3200"} #end)
+        
+        (#8 wire #3 => #6)
+        (#9 wire #2 => #5)
+        (#10 wire #4 => #7)
+      until i >= N / 2
+      returns (is_palindrome)
+      #pragma diagram {"xy":"H-71550;V-58650","wh":"90600;23800"} #end)
+    (/* 
+     NOTE: We could do a forward <<N/2>> 
+     but it would raise an error if N=1.
+     Putting in an ActivateIf block would not solve the issue
+     */ let
+    #pragma diagram {"xy":"H-76400;V-79201","wh":"58000;9797"} #end)
+    
+    (#11 wire #1 .(2) => #0
+    #pragma diagram {"wp":"v0|#1 #0"} #end)
+}
+
+function is_palindrome_list2 <<N>> (list: 'T^N;)
+  returns (is_palindrome: bool;)
+{
+  diagram
+    (#0 block (foldi ({op_expr%function i, b => b and ((list.[i] default list[0]) = (list.[N-1-i] default list[N-1]))%op_expr})) <<N>>
+    #pragma diagram {"xy":"H-72400;V-92175","wh":"70900;18000"} #end)
+    (#2 expr true
+    #pragma diagram {"xy":"H-117475;V-90175"} #end)
+    (#3 def is_palindrome
+    #pragma diagram {"xy":"H-24450;V-90175","wh":"18000;3200"} #end)
+    
+    (#4 wire #2 => #0)
+    (#5 wire #0 => #3
+    #pragma diagram {"wp":"v0|#0 #3"} #end)
+}
+
+function is_palindrome_int <<N>> (i: 'T;)
+  returns (is_palindrome: bool;)
+  where 'T integer
+{
+  diagram
+    (#0 expr Abs(i)
+    #pragma diagram {"xy":"H-17900;V-3213","wh":"10000;3200"} #end)
+    (#1 block (mapfold ({op_expr%function n => (n / 10, (n mod 10:>uint8))%op_expr})) <<N>>
+    #pragma diagram {"xy":"H15050;V-3213","wh":"24900;17950"} #end)
+    (#3 block is_palindrome_list <<N>> 
+              #pragma diagram {"xy":"H56900;V-3213","wh":"20000;14000"} #end)
+    (#4 def is_palindrome
+    #pragma diagram {"xy":"H91400;V-3213","wh":"18000;3200"} #end)
+    
+    (#5 wire #0 => #1)
+    (#6 wire #1 .(2) => #3
+    #pragma diagram {"wp":"v-988|#1 #3"} #end)
+    (#7 wire #3 => #4
+    #pragma diagram {"wp":"v0|#3 #4"} #end)
+}
+
+function is_palindrome_int_no_size (i: 'T;)
+  returns (is_palindrome: bool;)
+  where 'T integer
+{
+  diagram
+    (#0 def last_idx
+    #pragma diagram {"xy":"H58650;V-7213","wh":"12000;3200"} #end)
+    (#1 expr forward
+      <<MAX_NB_DIGITS_UINT64>> with <<i>>
+      diagram
+        (#2 expr true pre is_palindrome
+        #pragma diagram {"xy":"h-11150;v1900","wh":"26000;3200"} #end)
+        (#3 expr digits[i] = (digits.[last_idx - i] default 0)
+        #pragma diagram {"xy":"h-22150;v-1900","wh":"48000;3200"} #end)
+        (#4 expr #5 and #6
+          where
+            (#5 group)
+            (#6 group)
+        #pragma diagram {"xy":"h15000;v0"} #end)
+        (#7 def is_palindrome
+        #pragma diagram {"xy":"h37150;v0","wh":"18000;3200"} #end)
+        
+        (#8 wire #3 => #5)
+        (#9 wire #2 => #6)
+        (#10 wire #4 => #7)
+      until i >= last_idx / 2
+      returns (is_palindrome)
+      #pragma diagram {"xy":"H1656;V17951","wh":"100900;23800"} #end)
+    (#11 def digits
+    #pragma diagram {"xy":"H61650;V-19582","wh":"10000;3200"} #end)
+    (#12 def is_palindrome
+    #pragma diagram {"xy":"H70606;V19851","wh":"18000;3200"} #end)
+    (#13 expr forward
+      <<MAX_NB_DIGITS_UINT64>>
+      diagram
+        (#14 expr last'n / 10
+        #pragma diagram {"xy":"h-5000;v-2369","wh":"16000;3200"} #end)
+        (#15 def n
+        #pragma diagram {"xy":"h19000;v-2369"} #end)
+        (#16 def digits
+        #pragma diagram {"xy":"h19000;v2369","wh":"10000;3200"} #end)
+        (#17 expr (last'n mod 10:>uint8)
+        #pragma diagram {"xy":"h-11000;v2369","wh":"26000;3200"} #end)
+        
+        (#18 wire #14 => #15)
+        (#19 wire #17 => #16)
+        
+        (var
+            n: 'T last=Abs(i);)
+      until n = 0
+      returns ([digits: default=0_ui8])
+      #pragma diagram {"xy":"H8450;V-13397","wh":"56600;24738"} #end)
+    
+    (#20 wire #1 .(2) => #12
+    #pragma diagram {"wp":"v1900|#1 #12"} #end)
+    (#21 wire #13 .(2) => #11
+    #pragma diagram {"wp":"v-6185|#13 #11"} #end)
+    (#22 wire #13 .(1) => #0
+    #pragma diagram {"wp":"v6184|#13 #0"} #end)
+    
+    (var
+        last_idx: uint8;
+        digits: uint8^MAX_NB_DIGITS_UINT64;)
+}
+
+inline function /* Return the absolute value of the operand. */ Abs (/* Operand */ x: 'T;)
+  returns (/* Result of the operation */ v: 'T;)
+  where 'T numeric
+{
+  diagram
+    (#0 expr (0 :> 'T)
+    #pragma diagram {"xy":"H8930;V7415","wh":"12438;3200"} #end)
+    (#1 def v
+    #pragma diagram {"xy":"H75149;V15815"} #end)
+    (#2 expr x
+    #pragma diagram {"xy":"H11149;V13915"} #end)
+    (#3 expr - #4
+      where
+        (#4 group)
+    #pragma diagram {"xy":"H33149;V17715"} #end)
+    (#5 expr if #6 then #7 else #8
+      where
+        (#6 group)
+        (#7 group)
+        (#8 group)
+    #pragma diagram {"xy":"H54149;V15815"} #end)
+    (#9 expr #10 <= #11
+      where
+        (#10 group)
+        (#11 group)
+    #pragma diagram {"xy":"H32149;V9315"} #end)
+    
+    (#12 wire #3 => #8)
+    (#13 wire #2 => #11, #4, #7
+    #pragma diagram {"wp":"#2 h6000[v-2700 #11, h5000[v3800 #4, #7]]"} #end)
+    (#14 wire #5 => #1)
+    (#15 wire #0 => #10)
+    (#16 wire #9 => #6
+    #pragma diagram {"wp":"#9 h18500 #6"} #end)
+}
+
+const MAX_NB_DIGITS_UINT64: int32 = 10;

@@ -17,16 +17,24 @@ sum_of_digits(12345) -- returns 15
 ```
 
 Next level: update the function to take an integer of any number of digits as an input.
+Next level #2: implement the function with `fold` / `mapfold`.
 
 ## Challenge 2: palindrome
 
-Create an operator to check if a given string or number is a palindrome.
+Create an operator `is_palindrome_list` to check if a given list of size `N` is a palindrome.
+Create another operator `is_palindrome_int` to check if a given number of `N digits is a palindrome.
 
-A palindrome is a word, phrase, number, or sequence that reads the same backward as forward, ignoring spaces, punctuation, and capitalization.
+In both cases, the size `N` shall be a size parameter. You can try to implement with a `forward` or a `foldi`.
+
+A palindrome is a word, phrase, number, or sequence that reads the same backward as forward.
 
 Example:
-Word: `"radar"` (reads the same backward as forward)
-Number: `121` (reads the same backward as forward)
+
+* List: `[10.0, 23.4, 567.8, 23.4, 10.0]`
+* Word: `"radar"` (i.e. list of chars `[ 'r', 'a', 'd', 'a', 'r' ]`)
+* Number: `121`
+
+Next level: check if a number is a palindrome without specifying the number of digits.
 
 ## Challenge 3: number of vowels & consonants
 

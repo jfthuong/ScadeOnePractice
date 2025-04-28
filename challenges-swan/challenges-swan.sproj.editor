@@ -4,6 +4,7 @@
   ],
   "ModulesOrder": [
     "assets\\challenge1.swan",
+    "assets\\ch2_palindrome.swan",
     "assets\\challenge8_subset.swan",
     "assets\\testModule.swant"
   ]

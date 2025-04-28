@@ -1,3 +1,4 @@
+# Swan
 *.sproj.user
 
 # Jobs
@@ -5,3 +6,8 @@ out/
 cg_log.json
 sim_log.json
 config.json
+
+# Misc
+README.html
+*.zip
+*.7z

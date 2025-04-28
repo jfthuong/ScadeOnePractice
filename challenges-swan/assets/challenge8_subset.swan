@@ -153,7 +153,7 @@ function count_substr_size_S <<N, S>> (set: 'T^N;
             restart #6
             :1: if (S <= 1)
             restart #9 end
-          #pragma diagram {"tp":"h-19000;v-2684|#9 h-5292 h-5292 h2000;v0|h1225;v-12136[h175;v2000 v167 v167 v167 v3511 h-2262;v3511 h-2262 h-667 h-667 h23000;v0|#6, h175;v-2000 v-167 v-167 v-167 v-2494 h4989;v-2494 h4989;v0 h7193 h7193 h7193 h2573;v0 h2573;v1286 v1286 v667 v667 h0;v-5600|#9]"} #end;
+          #pragma diagram {"tp":"h-19000;v-2684|#9 h-5292 h-5292 h2000;v0|h1225;v-12136[h175;v2000 v167 v167 v167 v3511 h-2262;v3511 h-2262 h-667 h-667 h23000;v0|#6, h175;v-2000 v-167 v-167 v-167 v-2494 h4989;v-2494 h4989 h7193 h7193 h7193 h2573 h2573;v1286 v1286 v667 v667 h0;v-5600|#9]"} #end;
           :1: #6 unless if (goToNext)
             :2: if (true)
             restart #6
