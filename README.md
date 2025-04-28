@@ -36,34 +36,45 @@ Example:
 
 Next level: check if a number is a palindrome without specifying the number of digits.
 
-## Challenge 3: number of vowels & consonants
+## Challenge 3: basic operations on arrays
 
-Write an operator to count the number of vowels and consonants in a given list of chars.
+Write 2 operators:
 
-Example:
-
-```swan
-count_vowels_and_consonants( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' ] ) -- returns 3, 7
-```
+* `min_max` to find the minimum and maximum values in a list of numbers
+* `reverse` to reverse a list **WITHOUT USING THE BUILT-IN FUNCTION**
 
 ## Challenge 4: occurrences of numbers
 
 Given a string `s` consisting of alphabets and digits, find the frequency of each digit in the given string.
 
-e.g. `a11472o5t6` => `0 2 1 0 1 1 1 1 0 0`
-... corresponding to  0 1 2 3 4 5 6 7 8 9
+e.g. `a11472o5t6` => `[0, 2, 1, 0, 1, 1, 1, 1, 0, 0]`
+... corresponding to   0  1  2  3  4  5  6  7  8  9
 
 ## Challenge 5: factorial
 
 Implement an operator to calculate the factorial of a given positive integer using recursion.
 
-## Challenge 6: Fibonacci
+## Challenge 6: Latin Square
 
-Generate the first `N` (a constant) numbers in the Fibonacci sequence.
-The Fibonacci sequence is a series of numbers in which each number (after the first two) is the sum of the two preceding ones,
-usually starting with 0 and 1.
+Write an operator that generate a latin square for numbers 1 to `N`.
 
-Example: `N = 10` => `0, 1, 1, 2, 3, 5, 8, 13, 21, 34`
+A Latin square is an `N x N` array filled with `N` different symbols, each occurring exactly once in each row and exactly once in each column.
+
+For example, a 4x4 Latin square could be:
+
+```swan
+[
+    [1, 2, 3, 4],
+    [2, 3, 4, 1],
+    [3, 4, 1, 2],
+    [4, 1, 2, 3]
+]
+```
+
+A simple algorithm to generate a Latin square is to
+
+1. Fill the first row with numbers from 1 to `N`
+2. Shift the previous row by one position (either left or right) for each subsequent row
 
 ## Challenge 7: Prime numbers
 
@@ -121,3 +132,17 @@ and `1234` (4 digits), which isn't:
     1^4 + 2^4 + 3^4 + 4^4 = 1 + 16 + 81 + 256 = 354
 ```
 
+## Challenge 11: Fibonacci
+
+Generate the first `N` (a constant) numbers in the Fibonacci sequence.
+The Fibonacci sequence is a series of numbers in which each number (after the first two) is the sum of the two preceding ones,
+usually starting with 0 and 1.
+
+Example: `N = 10` => `0, 1, 1, 2, 3, 5, 8, 13, 21, 34`
+
+## Challenge 12: phone number verification
+
+Use an automaton to check if a list of chars is a valid Chinese phone number, following the 2 formats
+
+* mobile phone number: `1[0-9]{10}` (e.g.`[ '1', '3', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ]`)
+* fixed phone number: `(0[0-9]{2,3})[0-9]{7,8}` (e.g. `[ '(', '0', '2', '1', ')', '1', '2', '3', '4', '5', '6', '7', '8' ]`)
