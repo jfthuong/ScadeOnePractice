@@ -3,9 +3,10 @@
     "jobs\\testexec_7abe3ef\\.sjob"
   ],
   "ModulesOrder": [
-    "assets\\challenge1.swan",
+    "assets\\ch1_sum_digits.swan",
     "assets\\ch2_palindrome.swan",
-    "assets\\challenge8_subset.swan",
+    "assets\\ch8_subset.swan",
+    "assets\\ch11_Fibonacci.swan",
     "assets\\testModule.swant"
   ]
 }

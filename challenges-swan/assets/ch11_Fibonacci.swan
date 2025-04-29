@@ -1,0 +1,55 @@
+-- version swan: 2025.1 graph: 2.0
+const START_0: int32 = 0;
+
+const START_1: int32 = 1;
+
+function fibonacci_N <<N>> ()
+  returns (numbers: int32^N;)
+{
+  diagram
+    (#0 def numbers
+    #pragma diagram {"xy":"H11550;V-5250","wh":"12000;3200"} #end)
+    (#1 expr forward
+      <<N>> with <<i>>
+      diagram
+        (var
+            n0;)
+        (activate $ActivateIf0
+          if i = 0
+          then
+            {
+              diagram
+                (#2 def n
+                #pragma diagram {"xy":"h16500;v1850"} #end)
+                (#3 expr START_0
+                #pragma diagram {"xy":"h-3725;v1850","wh":"12000;3200"} #end)
+                (#4 def n0
+                #pragma diagram {"xy":"h16500;v-1650"} #end)
+                
+                (#5 wire #3 => #2, #4
+                #pragma diagram {"wp":"#3 h6612[#2, v-3500 #4]"} #end)
+            #pragma diagram {"xy":"h0;v-6800","wh":"48550;10900"} #end
+            }
+          else
+            {
+              diagram
+                (#6 expr START_0 pre n
+                #pragma diagram {"xy":"h-6725;v-2700","wh":"18000;3200"} #end)
+                (#7 def n0
+                #pragma diagram {"xy":"h16500;v-2700"} #end)
+                (#9 expr START_1 pre (n0 + n)
+                #pragma diagram {"xy":"h-9725;v1000","wh":"24000;3200"} #end)
+                (#10 def n
+                #pragma diagram {"xy":"h16500;v1000"} #end)
+                
+                (#11 wire #9 => #10)
+                (#12 wire #6 => #7)
+            #pragma diagram {"xy":"h0;v8809","wh":"48550;12600"} #end
+            }
+        #pragma diagram {"xy":"h0;v-170","wh":"51550;33219"} #end)
+      returns ([n])
+      #pragma diagram {"xy":"H-40025;V-5250","wh":"60150;49959"} #end)
+    
+    (#8 wire #1 => #0
+    #pragma diagram {"wp":"v0|#1 #0"} #end)
+}

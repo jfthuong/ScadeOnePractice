@@ -94,7 +94,7 @@ You can use state machines to do that.
 
 Next level: accept a subset of any length (specified as a size parameter).
 
-## CHallenge 9: Matrix multiplication
+## Challenge 9: Matrix multiplication
 
 Write a function that accepts two square (2x2) matrices (two dimensional arrays), and returns the product of the two.
 Only square matrices will be given.
@@ -114,7 +114,25 @@ C[1][0] = A[1][0] * B[0][0] + A[1][1] * B[1][0] = 1*4 + 4*2 = 10
 C[1][1] = A[1][0] * B[0][1] + A[1][1] * B[1][1] = 1*1 + 4*3 = 13
 ```
 
-## Challenge 10: Narcissistic number
+Next level: implement the function for any size of square matrix.
+
+## Challenge 10: phone number verification
+
+Use an automaton to check if a list of chars is a valid Chinese phone number, following the 2 formats
+
+* mobile phone number: `1[0-9]{10}` (e.g.`[ '1', '3', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ]`)
+* fixed phone number: `(0[0-9]{2,3})[0-9]{7,8}` (e.g. `[ '(', '0', '2', '1', ')', '1', '2', '3', '4', '5', '6', '7', '8' ]`)
+
+## Challenge 11: Fibonacci
+
+Generate the first `N` (a constant) numbers in the Fibonacci sequence.
+The Fibonacci sequence is a series of numbers in which each number (after the first two) is the sum of the two preceding ones,
+usually starting with 0 and 1.
+
+Example: `N = 10` => `0, 1, 1, 2, 3, 5, 8, 13, 21, 34`
+
+
+## Challenge 12: Narcissistic number
 
 Return whether a given number is a Narcissistic number in base 10.
 
@@ -131,18 +149,3 @@ and `1234` (4 digits), which isn't:
 ```swan
     1^4 + 2^4 + 3^4 + 4^4 = 1 + 16 + 81 + 256 = 354
 ```
-
-## Challenge 11: Fibonacci
-
-Generate the first `N` (a constant) numbers in the Fibonacci sequence.
-The Fibonacci sequence is a series of numbers in which each number (after the first two) is the sum of the two preceding ones,
-usually starting with 0 and 1.
-
-Example: `N = 10` => `0, 1, 1, 2, 3, 5, 8, 13, 21, 34`
-
-## Challenge 12: phone number verification
-
-Use an automaton to check if a list of chars is a valid Chinese phone number, following the 2 formats
-
-* mobile phone number: `1[0-9]{10}` (e.g.`[ '1', '3', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ]`)
-* fixed phone number: `(0[0-9]{2,3})[0-9]{7,8}` (e.g. `[ '(', '0', '2', '1', ')', '1', '2', '3', '4', '5', '6', '7', '8' ]`)
